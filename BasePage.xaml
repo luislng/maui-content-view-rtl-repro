@@ -1,0 +1,16 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             x:Class="MauiArabic.BasePage"
+             ControlTemplate="{DynamicResource BaseTemplate}"
+             Shell.TabBarIsVisible="False"
+             Shell.BackgroundColor="Blue"
+             ios:Page.UseSafeArea="False">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="BaseTemplate">
+            <ContentPresenter
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+        </ControlTemplate>
+    </ContentPage.Resources>
+</ContentPage>
