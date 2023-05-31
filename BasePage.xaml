@@ -1,16 +1,40 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="MauiArabic.BasePage"
              ControlTemplate="{DynamicResource BaseTemplate}"
-             Shell.TabBarIsVisible="False"
              Shell.BackgroundColor="Blue"
              ios:Page.UseSafeArea="False">
     <ContentPage.Resources>
         <ControlTemplate x:Key="BaseTemplate">
-            <ContentPresenter
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill" />
+            <Grid>
+                <ContentPresenter
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill" />
+                <ContentView>
+                    <!-- ActivityIndicator misbehaves with WidthRequest and HeightRequest set even with custom handler -->
+                    <ActivityIndicator IsRunning="True"
+                                       WidthRequest="80"
+                                       HeightRequest="80"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       BackgroundColor="#50000000"
+                                       Color="Black" />
+
+                    <!-- SKLottieView can be fixed with a custom handler -->
+                    <!--<skia:SKLottieView
+                        WidthRequest="160"
+                        HeightRequest="160"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsAnimationEnabled="true"
+                        RepeatMode="Restart"
+                        RepeatCount="-1"
+                        BackgroundColor="#30000000"
+                        Source="145264-loading.json" />-->
+                </ContentView>
+            </Grid>
         </ControlTemplate>
     </ContentPage.Resources>
 </ContentPage>

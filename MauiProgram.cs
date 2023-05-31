@@ -1,5 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
+using SkiaSharp.Views.Maui.Controls.Hosting;
+
+#if IOS
+using Maui.FixesAndWorkarounds;
+#endif
 
 namespace MauiArabic;
 
@@ -10,34 +15,16 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+            .UseSkiaSharp()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			})
-            .ConfigureMauiHandlers(handlers =>
-            {
 #if IOS
-                // Workaround from Shane and EZ
-                ContentViewHandler.Mapper.AppendToMapping(nameof(IContentView.Content), (handler, view) =>
-                {
-                      if (view is ContentView cv && cv.Content != null)
-                      {
-                            cv.FlowDirection = FlowDirection.LeftToRight;
-
-                            switch (Microsoft.Maui.ApplicationModel.AppInfo.RequestedLayoutDirection)
-                            {
-                                  case LayoutDirection.LeftToRight:
-                                        cv.Content.FlowDirection = FlowDirection.LeftToRight;
-                                        break;
-                                  case LayoutDirection.RightToLeft:
-                                        cv.Content.FlowDirection = FlowDirection.RightToLeft;
-                                        break;
-                            }
-                      }
-                });
+            .ConfigureRTLFixes()
 #endif
-            });
+			;
 
 
 #if DEBUG
